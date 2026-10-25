@@ -1,0 +1,22 @@
+take the photo during 10-bit video from an 8-bit stream
+
+classes com/oplus/ocs/camera/producer/mode/VideoMode getSurfaceFormatBySurfaceType() read
+com.oplus.photo.10bit.format for the capture stream of a 10-bit video session. PhotoMode reads the same key
+for its own 10-bit capture_yuv stream, so the 35 (YUV_420_888) set for video snapshots also turned Photo's
+"10-bit color" stream into 8-bit YUV, which the 10-bit HEIF writer reads as P010: a green photo with the
+image twice side by side. VideoMode now returns 35 for its capture stream without reading the key, and the
+key is back at its default (34, P010) for Photo.
+
+diff --git a/classes/com/oplus/ocs/camera/producer/mode/VideoMode.smali b/classes/com/oplus/ocs/camera/producer/mode/VideoMode.smali
+index ada74f4..f074cd2 100644
+--- a/classes/com/oplus/ocs/camera/producer/mode/VideoMode.smali
++++ b/classes/com/oplus/ocs/camera/producer/mode/VideoMode.smali
+@@ -4457,7 +4457,7 @@
+ 
+     move-result p0
+ 
+-    if-eqz p0, :cond_5a
++    goto :cond_5a
+ 
+     sget-object p0, Lcom/oplus/ocs/camera/common/util/CameraConfigBase;->KEY_PHOTO_10BIT_FORMAT:Lcom/oplus/ocs/camera/common/util/CameraConfigBase$Key;
+ 
