@@ -1,0 +1,12 @@
+diff --git a/odm/etc/camera/config/camera_unit_config b/odm/etc/camera/config/camera_unit_config
+index 3d32e3ec49a08eb15b1e2da1141706fecd703bd5..0e7598b0c18eb1dbb025ed0c0fe646d6f842caa0 100644
+--- a/odm/etc/camera/config/camera_unit_config
++++ b/odm/etc/camera/config/camera_unit_config
+@@ -247,6 +247,7 @@
+ 
+   "vendor_tag_type_values": {
+     "com.oplus.authed.white.list":"com.ss.android.ugc.aweme, com.finshell.wallet",
++    "com.oplus.camera.jni.version":"V002.000.000",
+     "com.oplus.sat.wide.support.imagesizes":"4000x3008x4000x2250x4000x1800x3008x3008",
+     "com.oplus.sat.ultra.support.imagesizes":"4096x3072x4096x2304x4096x1840x3072x3072",
+     "com.oplus.rear.portrait.sat.fullbodysize":"4000x3008x3200x2400",

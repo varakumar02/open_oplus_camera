@@ -1,0 +1,56 @@
+diff --git a/odm/etc/camera/config/oplus_camera_algo_switch_config b/odm/etc/camera/config/oplus_camera_algo_switch_config
+index 745254bbefbd2e159f1265c43118d427c4e8237a..5ac0e1b58823f8faa24229aeaa4c9d21fcfdd70a 100644
+--- a/odm/etc/camera/config/oplus_camera_algo_switch_config
++++ b/odm/etc/camera/config/oplus_camera_algo_switch_config
+@@ -2110,6 +2110,51 @@
+                 }
+             ]
+         },
++        {
++            "mode": "dolbyVideo",
++            "entity": [
++                {
++                    "id": 0,
++                    "camera_num": 1,
++                    "separate_preview_video": 1,
++                    "pipelines": {
++                        "preview": {
++                            "enable": 1,
++                            "master_input_width": 1920,
++                            "master_input_height": 1080,
++                            "slave_input_width": 0,
++                            "slave_input_height": 0,
++                            "third_input_width": 0,
++                            "third_input_height": 0,
++                            "output_width": 1920,
++                            "output_height": 1080,
++                            "skip_frame_cnt": 0,
++                            "pipeline_copy_from": "",
++                            "algonode_copy_from": "",
++                            "algo_list": [ "preview_lsd" ]
++                        },
++                        "video": {
++                            "enable": 1,
++                            "master_input_width": 3840,
++                            "master_input_height": 2160,
++                            "slave_input_width": 0,
++                            "slave_input_height": 0,
++                            "third_input_width": 0,
++                            "third_input_height": 0,
++                            "output_width": 3840,
++                            "output_height": 2160,
++                            "skip_frame_cnt": 0,
++                            "pipeline_copy_from": "",
++                            "algonode_copy_from": "",
++                            "algo_list": [ "video_watermark_process_on_output" ]
++                        },
++                        "asd": {
++                            "enable": 0
++                        }
++                    }
++                }
++            ]
++        },
+         {
+             "mode": "ultraNight",
+             "entity": [

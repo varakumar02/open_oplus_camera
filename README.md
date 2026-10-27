@@ -16,6 +16,8 @@ patches and writes the result to `vendor/oplus/camera-blobs`, the private
 | `patches-safe/` | OPLUS Private Safe 17.3.3 (`FileEncryption.apk`) |
 | `tools/smali_patch.py` | applies one of the patch directories to an APK or jar |
 | `tools/manifest_add_permission.py` | adds `<uses-permission>` entries to an APK's binary manifest |
+| `patches-odm/<device>/` | the device's odm camera configs, protobuf and main-sensor tuning file (git diffs, binary for the last two) |
+| `tools/odm_patch.py`, `devices/<device>.mk` | apply those to the stock files and install the result |
 | `opluscamera.mk`, `configs/`, `init/`, `sepolicy/`, `OplusPermissions/` | build configuration |
 
 ## Sources
@@ -53,6 +55,25 @@ blob repo is private.
 The run needs Java (the tree's `prebuilts/jdk/jdk21`, or `$JAVA`) and git. Commit the output in
 `vendor/oplus/camera-blobs`. Blobs over 95 MB are written as 20 MiB `.partNN` files, which
 `vendorsetup.sh` joins again.
+
+## Device odm configs
+
+The camera configs under `odm/etc/camera/` and the main sensor's tuning file differ between the 9 and
+the 9 Pro, so they are not in `proprietary-files.txt`. Their stock copies stay untouched in
+`vendor/oneplus/<device>`; the patched copies are made with
+
+```
+vendor/oplus/camera/tools/odm_patch.py <device> vendor/oneplus/<device>/proprietary
+```
+
+which writes `vendor/oplus/camera-blobs/devices/<device>/`. The device tree inherits
+`vendor/oplus/camera/devices/<device>.mk` before its vendor makefile. For a given destination the first
+`PRODUCT_COPY_FILES` entry wins, so the patched copies replace the stock ones; afterwards
+`out/target/product/<device>/product_copy_files_ignored.txt` lists the vendor copies.
+
+To change one: edit the file in `devices/<device>/` and export the diff against the stock file with
+`git diff --no-index --binary --full-index` into the matching `patches-odm/<device>/` file, keeping the paths as
+`a/odm/...` and `b/odm/...`.
 
 ## How the patches work
 

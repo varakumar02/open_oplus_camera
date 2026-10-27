@@ -1,0 +1,29 @@
+diff --git a/odm/etc/camera/CameraHWConfiguration.config b/odm/etc/camera/CameraHWConfiguration.config
+index 8a1ee1d3ba624eada0353027aca430969ca85271..e73e1b1ffb1daa2ebee84932b00cc165dedd5189 100644
+--- a/odm/etc/camera/CameraHWConfiguration.config
++++ b/odm/etc/camera/CameraHWConfiguration.config
+@@ -464,7 +464,7 @@
+     ratioRange                  = 0.5;    1.0
+     subStrategyRatioRangeList   = 0.5;    1.0
+     zoomInActiveMapList         =      0x3
+-    fixActiveMapList            =      0x1
++    fixActiveMapList            =      0x3
+     zoomUpActiveMapList         =      0x3
+     zoomOutActiveMapList        =      0x3
+     upwardTransitionActiveMap   = 0x3
+@@ -555,6 +555,7 @@
+     Mode[3]          =     0x80AD;              0x0002;            2       #SuperStable Usecase for videoUltraNightMode 2
+     Mode[4]          =     0x83AE;              0x0002;            3       #8k30fps video 2
+     Mode[5]          =     0x830B;              0x0000;            2       #Video portrait
++    Mode[6]          =     0x83AE;              0x0000;            2       #8k30fps video 0, 2-stream (preview+video, no JPEG snapshot)
+ 
+     #usecase list
+     Usecase[0]       =     UsecaseVideoEIS2PreviewEIS2SnapshotYUV
+@@ -563,6 +564,7 @@
+     Usecase[3]       =     UsecaseOPlusVideoEIS2PreviewEIS2
+     Usecase[4]       =     UsecaseVideo8KEIS2PreviewEIS2SnapshotYUV
+     Usecase[5]       =     UsecaseOPlusVideoEIS3PreviewEIS2
++    Usecase[6]       =     UsecaseOPlusVideo8kEIS3PreviewEIS2
+ 
+ [SupportedImageSizes]
+     #                  width height

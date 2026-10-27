@@ -1,0 +1,41 @@
+diff --git a/odm/etc/camera/CameraHWConfiguration.config b/odm/etc/camera/CameraHWConfiguration.config
+index f433c2d695281712ee264c0fc0abe4d20ba5db07..36a77897a828ef54b4d050fae56193334539dd6d 100644
+--- a/odm/etc/camera/CameraHWConfiguration.config
++++ b/odm/etc/camera/CameraHWConfiguration.config
+@@ -393,6 +393,7 @@
+     isOemUpdateLpm       = TRUE
+     isDivideZoomRatio    = TRUE
+     dualSATOperationMode = 0x8021
++    closeSlaveThresholdTime = 1
+ 
+ [DivideZoomRatio]
+     isUseCropRegion               = FALSE
+@@ -410,7 +411,7 @@
+     ratioRange                  = 0.5;    1.0
+     subStrategyRatioRangeList   = 0.5;    1.0
+     zoomInActiveMapList         =      0x3
+-    fixActiveMapList            =      0x1
++    fixActiveMapList            =      0x3
+     zoomUpActiveMapList         =      0x3
+     zoomOutActiveMapList        =      0x3
+     upwardTransitionActiveMap   = 0x3
+@@ -492,6 +493,9 @@
+     Mode[4]          =     0x83AE;              0x0002;            3       #8k30fps video 2
+     Mode[5]          =     0x830B;              0x0000;            2       #Video portrait
+     Mode[6]          =     0x840B;              0x0000;            2       #Video HDR
++    Mode[7]          =     0x83AE;              0x0000;            2       #8k30fps video 0, 2-stream (preview+video, no JPEG snapshot)
++    Mode[8]          =     0x840B;              0x0000;            3       #Video HDR + photo while recording
++    Mode[9]          =     0x80A4;              0x0000;            3       #Dolby Vision + photo while recording
+ 
+     #usecase list
+     Usecase[0]       =     UsecaseVideoEIS2PreviewEIS2SnapshotYUV
+@@ -501,6 +505,9 @@
+     Usecase[4]       =     UsecaseVideo8KEIS2PreviewEIS2SnapshotYUV
+     Usecase[5]       =     UsecaseOPlusVideoEIS3PreviewEIS2
+     Usecase[6]       =     UsecaseOPlusVideoEIS3PreviewEIS2
++    Usecase[7]       =     UsecaseOPlusVideo8kEIS3PreviewEIS2
++    Usecase[8]       =     UsecaseVideoEIS3PreviewEIS2SnapshotYUV
++    Usecase[9]       =     UsecaseVideoEIS3PreviewEIS2SnapshotYUV
+ 
+ [SupportedImageSizes]
+     #                  width height

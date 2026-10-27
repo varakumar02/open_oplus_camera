@@ -1,0 +1,400 @@
+diff --git a/odm/etc/camera/config/oplus_camera_config b/odm/etc/camera/config/oplus_camera_config
+index 35f72fafd6b45d4d1bd3e658f855a72ea0dcf84c..87b6233fd4001c7838953349aacd68c7384eb8d0 100644
+--- a/odm/etc/camera/config/oplus_camera_config
++++ b/odm/etc/camera/config/oplus_camera_config
+@@ -60,7 +60,7 @@
+   "VendorTag": "com.oplus.fuji.style.filter.support",
+   "Type": "Byte",
+   "Count": "1",
+-  "Value": "0"
++  "Value": "1"
+ },
+ 
+ {
+@@ -109,7 +109,7 @@
+   "VendorTag": "com.oplus.feature.video.live.hdr.support",
+   "Type": "Byte",
+   "Count": "1",
+-  "Value": "1"
++  "Value": "0"
+ },
+ 
+ {
+@@ -123,7 +123,7 @@
+   "VendorTag": "com.oplus.feature.video.live.hdr.except.8k.support",
+   "Type": "Byte",
+   "Count": "1",
+-  "Value": "1"
++  "Value": "0"
+ },
+ 
+ {
+@@ -998,7 +998,7 @@
+   "VendorTag": "com.oplus.10bits.heic.encode.support",
+   "Type": "Byte",
+   "Count": "1",
+-  "Value": "0"
++  "Value": "1"
+ },
+ 
+ {
+@@ -1361,8 +1361,8 @@
+ {
+   "VendorTag": "com.oplus.portrait.master.filter.type.list",
+   "Type": "String",
+-  "Count": "1",
+-  "Value": "Serenity.cube.rgb.bin"
++  "Count": "3",
++  "Value": "Radiance.cube.rgb.bin,Serenity.cube.rgb.bin,Emerald.cube.rgb.bin"
+ },
+ 
+ {
+@@ -1468,6 +1468,347 @@
+   "Type": "Byte",
+   "Count": "1",
+   "Value": "0"
++},
++{
++  "VendorTag": "com.oplus.camera.livephoto.color.dataspace.value",
++  "Type": "String",
++  "Count": "3",
++  "Value": "1,2,2"
++},
++{
++  "VendorTag": "com.oplus.support.dolby.video.live.shot",
++  "Type": "Byte",
++  "Count": "1",
++  "Value": "1"
++},
++{
++  "VendorTag": "com.oplus.camera.livephoto.video.only.colortransfer.sdr.video",
++  "Type": "Byte",
++  "Count": "1",
++  "Value": "1"
++},
++{
++  "VendorTag": "com.oplus.fast.shot.livephoto.mutex.support",
++  "Type": "Byte",
++  "Count": "1",
++  "Value": "1"
++},
++{
++  "VendorTag": "com.oplus.camera.livephoto.clear.video",
++  "Type": "Byte",
++  "Count": "1",
++  "Value": "1"
++},
++{
++  "VendorTag": "com.oplus.livePhoto.autoMicro.need.match.preview.timestamp",
++  "Type": "Byte",
++  "Count": "1",
++  "Value": "1"
++},
++{
++  "VendorTag": "com.oplus.camera.livephoto.support",
++  "Type": "Byte",
++  "Count": "1",
++  "Value": "1"
++},
++{
++  "VendorTag": "com.oplus.camera.livephoto.video.only.before.shutter",
++  "Type": "Byte",
++  "Count": "1",
++  "Value": "1"
++},
++{
++  "VendorTag": "com.oplus.camera.livephoto.video.max.duration",
++  "Type": "Int32",
++  "Count": "1",
++  "Value": "3200"
++},
++{
++  "VendorTag": "com.oplus.camera.livephoto.video.min.duration",
++  "Type": "Int32",
++  "Count": "1",
++  "Value": "200"
++},
++{
++  "VendorTag": "com.oplus.camera.livephoto.audio.timestamp.offset",
++  "Type": "Long",
++  "Count": "1",
++  "Value": "100000000"
++},
++{
++  "VendorTag": "com.oplus.camera.livephoto.pts.use.timestamp",
++  "Type": "Byte",
++  "Count": "1",
++  "Value": "1"
++},
++{
++  "VendorTag": "com.oplus.camera.livephoto.gyro.threshould.vector",
++  "Type": "Float",
++  "Count": "2",
++  "Value": "2.6, 2.6"
++},
++{
++  "VendorTag": "com.ocs.camera.ipu.filter.support",
++  "Type": "Byte",
++  "Count": "1",
++  "Value": "1"
++},
++{
++  "VendorTag": "com.oplus.video.sound.focus.support",
++  "Type": "Byte",
++  "Count": "1",
++  "Value": "1"
++},
++{
++  "VendorTag": "com.oplus.global.ev.support",
++  "Type": "Byte",
++  "Count": "1",
++  "Value": "1"
++},
++{
++  "VendorTag": "com.oplus.street.global.ev.support",
++  "Type": "Byte",
++  "Count": "1",
++  "Value": "1"
++},
++{
++  "VendorTag": "com.ocs.camera.ipu.watermark.support",
++  "Type": "Byte",
++  "Count": "1",
++  "Value": "1"
++},
++{
++  "VendorTag": "com.ocs.camera.ipu.frontblur.support",
++  "Type": "Byte",
++  "Count": "1",
++  "Value": "1"
++},
++{
++  "VendorTag": "com.ocs.camera.ipu.backblur.support",
++  "Type": "Byte",
++  "Count": "1",
++  "Value": "1"
++},
++{
++  "VendorTag": "com.ocs.camera.ipu.soft.light.support",
++  "Type": "Byte",
++  "Count": "1",
++  "Value": "1"
++},
++{
++  "VendorTag": "com.oplus.motion.capture.max.zoom.value",
++  "Type": "Float",
++  "Count": "1",
++  "Value": "30.0"
++},
++{
++  "VendorTag": "com.oplus.motion.capture.sat.zoom.support",
++  "Type": "Byte",
++  "Count": "1",
++  "Value": "1"
++},
++{
++  "VendorTag": "com.oplus.motion.capture.new.operation.mode",
++  "Type": "Byte",
++  "Count": "1",
++  "Value": "1"
++},
++{
++  "VendorTag": "com.oplus.more.tele.zoom.support",
++  "Type": "Byte",
++  "Count": "1",
++  "Value": "1"
++},
++{
++  "VendorTag": "com.oplus.motion.capture.support",
++  "Type": "Byte",
++  "Count": "1",
++  "Value": "1"
++},
++{
++  "VendorTag": "com.oplus.xpan.global.ev.support",
++  "Type": "Byte",
++  "Count": "1",
++  "Value": "1"
++},
++{
++  "VendorTag": "com.oplus.portrait.global.ev.support",
++  "Type": "Byte",
++  "Count": "1",
++  "Value": "1"
++},
++{
++  "VendorTag": "com.oplus.video.global.ev.support",
++  "Type": "Byte",
++  "Count": "1",
++  "Value": "1"
++},
++{
++  "VendorTag": "com.oplus.hasselblad.watermark.guide.support",
++  "Type": "Byte",
++  "Count": "1",
++  "Value": "1"
++},
++{
++  "VendorTag": "com.oplus.camera.support.custom.hasselblad.watermark.sellmode.default.open",
++  "Type": "Byte",
++  "Count": "1",
++  "Value": "1"
++},
++{
++  "VendorTag": "com.oplus.hasselblad.portrait.calibration",
++  "Type": "Float",
++  "Count": "6",
++  "Value": "30.0,3.5,65.0,3.5,90.0,1.9"
++},
++{
++  "VendorTag": "com.oplus.zsl.capture.no.need.preview.stream",
++  "Type": "Byte",
++  "Count": "1",
++  "Value": "1"
++},
++{
++  "VendorTag": "com.oplus.camera.gyro.threshould.vector",
++  "Type": "Float",
++  "Count": "2",
++  "Value": "2.6, 2.6"
++},
++{
++  "VendorTag": "com.oplus.camera.support.ai.master.watermark",
++  "Type": "Byte",
++  "Count": "1",
++  "Value": "1"
++},
++{
++  "VendorTag": "com.oplus.feature.master.mode.support",
++  "Type": "Float",
++  "Count": "1",
++  "Value": "1"
++},
++{
++  "VendorTag": "com.oplus.feature.master.mode.version",
++  "Type": "Float",
++  "Count": "1",
++  "Value": "2.0"
++},
++{
++  "VendorTag": "com.oplus.feature.master.mode.vignette.process.in.lsc.and.soft",
++  "Type": "Byte",
++  "Count": "1",
++  "Value": "1"
++},
++{
++  "VendorTag": "com.oplus.feature.video.4k.120fps.support",
++  "Type": "Byte",
++  "Count": "1",
++  "Value": "1"
++},
++{
++  "VendorTag": "com.oplus.feature.video.surface.release.support",
++  "Type": "Byte",
++  "Count": "1",
++  "Value": "1"
++},
++{
++  "VendorTag": "com.oplus.feature.export.super.text.support",
++  "Type": "Byte",
++  "Count": "1",
++  "Value": "1"
++},
++{
++  "VendorTag": "com.oplus.video.4k.track.focus.support",
++  "Type": "Byte",
++  "Count": "1",
++  "Value": "1"
++},
++{
++  "VendorTag": "com.oplus.only.high.picture.size.heif.in.aps",
++  "Type": "Byte",
++  "Count": "1",
++  "Value": "1"
++},
++{
++  "VendorTag": "com.oplus.feature.front.video.4k.support",
++  "Type": "Byte",
++  "Count": "1",
++  "Value": "1"
++},
++{
++  "VendorTag": "com.oplus.feature.video.front.1080p.60fps.support",
++  "Type": "Byte",
++  "Count": "1",
++  "Value": "1"
++},
++{
++  "VendorTag": "com.oplus.camera.support.cross.window.blur",
++  "Type": "Byte",
++  "Count": "1",
++  "Value": "1"
++},
++{
++  "VendorTag": "com.oplus.feature.video.1080p.120fps.support",
++  "Type": "Byte",
++  "Count": "1",
++  "Value": "1"
++},
++{
++  "VendorTag": "com.oplus.feature.video.1080p.120fps.zoom.range",
++  "Type": "Float",
++  "Count": "2",
++  "Value": "1,10"
++},
++{
++  "VendorTag": "com.oplus.feature.video.1080p120fps.max.zoom.list",
++  "Type": "Float",
++  "Count": "3",
++  "Value": "1,2.9,10"
++},
++{
++  "VendorTag": "com.oplus.feature.video.front.4k.60fps.support",
++  "Type": "Byte",
++  "Count": "1",
++  "Value": "1"
++},
++{
++  "VendorTag": "com.oplus.feature.video.dv.support",
++  "Type": "Byte",
++  "Count": "1",
++  "Value": "1"
++},
++{
++  "VendorTag": "com.oplus.feature.video.dv.60fps.support",
++  "Type": "Byte",
++  "Count": "1",
++  "Value": "1"
++},
++{
++  "VendorTag": "com.oplus.feature.video.10bit.support",
++  "Type": "Byte",
++  "Count": "1",
++  "Value": "1"
++},
++{
++  "VendorTag": "com.oplus.support.grand.tour.filter",
++  "Type": "Byte",
++  "Count": "1",
++  "Value": "1"
++},
++{
++  "VendorTag": "com.oplus.feature.flash.filter.support",
++  "Type": "Byte",
++  "Count": "1",
++  "Value": "1"
++},
++{
++  "VendorTag": "com.oplus.feature.tx400.filter.support",
++  "Type": "Byte",
++  "Count": "1",
++  "Value": "1"
++},
++{
++  "VendorTag": "com.oplus.support.jzk.movie.filter",
++  "Type": "Byte",
++  "Count": "1",
++  "Value": "1"
+ }
+-
+ ]
