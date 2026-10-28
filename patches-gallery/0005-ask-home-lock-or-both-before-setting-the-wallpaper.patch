@@ -1,0 +1,189 @@
+ask home, lock or both before setting the wallpaper
+
+Patch 0004 set the picked image on the home and lock screens together. After ✓ the gallery
+now shows a "Set wallpaper" dialog with Home screen, Lock screen and Home and lock screens,
+and calls WallpaperManager.setStream() with FLAG_SYSTEM, FLAG_LOCK or both.
+Helper class: com.oplus.gallery.aosp.AospWallpaper (source in src/gallery).
+
+diff --git a/classes9/com/oplus/gallery/pictureeditorpage/PictureEditorDM.smali b/classes9/com/oplus/gallery/pictureeditorpage/PictureEditorDM.smali
+index 2bd8c45..5a45bb2 100644
+--- a/classes9/com/oplus/gallery/pictureeditorpage/PictureEditorDM.smali
++++ b/classes9/com/oplus/gallery/pictureeditorpage/PictureEditorDM.smali
+@@ -66,7 +66,7 @@
+ 
+ # virtual methods
+ .method public final a(Landroid/app/Activity;Landroid/net/Uri;)V
+-    .locals 6
++    .locals 4
+ 
+     .line 1
+     const-string p0, "activity"
+@@ -108,33 +108,7 @@
+ 
+     .line 28
+     :cond_1c
+-    invoke-virtual {p1}, Landroid/content/Context;->getContentResolver()Landroid/content/ContentResolver;
+-
+-    move-result-object v2
+-
+-    invoke-virtual {v2, p2}, Landroid/content/ContentResolver;->openInputStream(Landroid/net/Uri;)Ljava/io/InputStream;
+-
+-    move-result-object v2
+-
+-    const/4 v3, 0x0
+-
+-    const/4 v4, 0x1
+-
+-    const/4 v5, 0x3
+-
+-    invoke-virtual {v1, v2, v3, v4, v5}, Landroid/app/WallpaperManager;->setStream(Ljava/io/InputStream;Landroid/graphics/Rect;ZI)I
+-
+-    invoke-virtual {v2}, Ljava/io/InputStream;->close()V
+-
+-    const-string v3, "Wallpaper set"
+-
+-    const/4 v4, 0x0
+-
+-    invoke-static {p1, v3, v4}, Landroid/widget/Toast;->makeText(Landroid/content/Context;Ljava/lang/CharSequence;I)Landroid/widget/Toast;
+-
+-    move-result-object v3
+-
+-    invoke-virtual {v3}, Landroid/widget/Toast;->show()V
++    invoke-static {p1, p2}, Lcom/oplus/gallery/aosp/AospWallpaper;->show(Landroid/app/Activity;Landroid/net/Uri;)V
+     :try_end_2e
+     .catch Ljava/lang/Exception; {:try_start_d .. :try_end_2e} :catch_1a
+ 
+diff --git a/classes9/com/oplus/gallery/aosp/AospWallpaper.smali b/classes9/com/oplus/gallery/aosp/AospWallpaper.smali
+new file mode 100644
+index 0000000..86b677e
+--- /dev/null
++++ b/classes9/com/oplus/gallery/aosp/AospWallpaper.smali
+@@ -0,0 +1,128 @@
++.class public final Lcom/oplus/gallery/aosp/AospWallpaper;
++.super Ljava/lang/Object;
++.source "AospWallpaper.java"
++
++# interfaces
++.implements Landroid/content/DialogInterface$OnClickListener;
++
++
++# instance fields
++.field private final mActivity:Landroid/app/Activity;
++
++.field private final mUri:Landroid/net/Uri;
++
++
++# direct methods
++.method private constructor <init>(Landroid/app/Activity;Landroid/net/Uri;)V
++    .locals 0
++
++    invoke-direct {p0}, Ljava/lang/Object;-><init>()V
++
++    iput-object p1, p0, Lcom/oplus/gallery/aosp/AospWallpaper;->mActivity:Landroid/app/Activity;
++
++    iput-object p2, p0, Lcom/oplus/gallery/aosp/AospWallpaper;->mUri:Landroid/net/Uri;
++
++    return-void
++.end method
++
++.method public static show(Landroid/app/Activity;Landroid/net/Uri;)V
++    .locals 4
++
++    new-instance v0, Landroid/app/AlertDialog$Builder;
++
++    invoke-direct {v0, p0}, Landroid/app/AlertDialog$Builder;-><init>(Landroid/content/Context;)V
++
++    const-string v1, "Set wallpaper"
++
++    invoke-virtual {v0, v1}, Landroid/app/AlertDialog$Builder;->setTitle(Ljava/lang/CharSequence;)Landroid/app/AlertDialog$Builder;
++
++    const/4 v1, 0x3
++
++    new-array v1, v1, [Ljava/lang/CharSequence;
++
++    const/4 v2, 0x0
++
++    const-string v3, "Home screen"
++
++    aput-object v3, v1, v2
++
++    const/4 v2, 0x1
++
++    const-string v3, "Lock screen"
++
++    aput-object v3, v1, v2
++
++    const/4 v2, 0x2
++
++    const-string v3, "Home and lock screens"
++
++    aput-object v3, v1, v2
++
++    new-instance v2, Lcom/oplus/gallery/aosp/AospWallpaper;
++
++    invoke-direct {v2, p0, p1}, Lcom/oplus/gallery/aosp/AospWallpaper;-><init>(Landroid/app/Activity;Landroid/net/Uri;)V
++
++    invoke-virtual {v0, v1, v2}, Landroid/app/AlertDialog$Builder;->setItems([Ljava/lang/CharSequence;Landroid/content/DialogInterface$OnClickListener;)Landroid/app/AlertDialog$Builder;
++
++    invoke-virtual {v0}, Landroid/app/AlertDialog$Builder;->show()Landroid/app/AlertDialog;
++
++    return-void
++.end method
++
++
++# virtual methods
++.method public onClick(Landroid/content/DialogInterface;I)V
++    .locals 6
++
++    add-int/lit8 v4, p2, 0x1
++
++    :try_start_0
++    iget-object v0, p0, Lcom/oplus/gallery/aosp/AospWallpaper;->mActivity:Landroid/app/Activity;
++
++    invoke-virtual {v0}, Landroid/content/Context;->getContentResolver()Landroid/content/ContentResolver;
++
++    move-result-object v1
++
++    iget-object v2, p0, Lcom/oplus/gallery/aosp/AospWallpaper;->mUri:Landroid/net/Uri;
++
++    invoke-virtual {v1, v2}, Landroid/content/ContentResolver;->openInputStream(Landroid/net/Uri;)Ljava/io/InputStream;
++
++    move-result-object v1
++
++    invoke-static {v0}, Landroid/app/WallpaperManager;->getInstance(Landroid/content/Context;)Landroid/app/WallpaperManager;
++
++    move-result-object v2
++
++    const/4 v3, 0x0
++
++    const/4 v5, 0x1
++
++    invoke-virtual {v2, v1, v3, v5, v4}, Landroid/app/WallpaperManager;->setStream(Ljava/io/InputStream;Landroid/graphics/Rect;ZI)I
++
++    invoke-virtual {v1}, Ljava/io/InputStream;->close()V
++
++    const-string v1, "Wallpaper set"
++
++    const/4 v2, 0x0
++
++    invoke-static {v0, v1, v2}, Landroid/widget/Toast;->makeText(Landroid/content/Context;Ljava/lang/CharSequence;I)Landroid/widget/Toast;
++
++    move-result-object v0
++
++    invoke-virtual {v0}, Landroid/widget/Toast;->show()V
++    :try_end_0
++    .catch Ljava/lang/Exception; {:try_start_0 .. :try_end_0} :catch_0
++
++    return-void
++
++    :catch_0
++    move-exception v0
++
++    const-string v1, "AospWallpaper"
++
++    const-string v2, "setStream failed"
++
++    invoke-static {v1, v2, v0}, Landroid/util/Log;->w(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)I
++
++    return-void
++.end method
