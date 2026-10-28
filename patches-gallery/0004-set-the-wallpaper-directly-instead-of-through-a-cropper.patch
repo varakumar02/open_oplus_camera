@@ -1,0 +1,71 @@
+set the wallpaper directly instead of through a cropper
+
+"Set as wallpaper" (PictureEditorDM.a(), log tag WallpaperSetUtil) asked
+WallpaperManager.getCropAndSetWallpaperIntent() for a crop activity and started it. On
+this ROM that throws "Cannot use passed URI to set wallpaper", because no activity in the
+launcher package or in config_wallpaperCropperPackage handles CROP_AND_SET_WALLPAPER, so the
+✓ button did nothing. The picked image is now read with ContentResolver.openInputStream()
+and passed to WallpaperManager.setStream(stream, null, true, FLAG_SYSTEM | FLAG_LOCK),
+followed by a "Wallpaper set" toast. There is no crop step; the wallpaper service scales the
+image itself.
+
+diff --git a/classes9/com/oplus/gallery/pictureeditorpage/PictureEditorDM.smali b/classes9/com/oplus/gallery/pictureeditorpage/PictureEditorDM.smali
+index 5579aad..2bd8c45 100644
+--- a/classes9/com/oplus/gallery/pictureeditorpage/PictureEditorDM.smali
++++ b/classes9/com/oplus/gallery/pictureeditorpage/PictureEditorDM.smali
+@@ -66,7 +66,7 @@
+ 
+ # virtual methods
+ .method public final a(Landroid/app/Activity;Landroid/net/Uri;)V
+-    .locals 4
++    .locals 6
+ 
+     .line 1
+     const-string p0, "activity"
+@@ -108,26 +108,33 @@
+ 
+     .line 28
+     :cond_1c
+-    invoke-virtual {v1, p2}, Landroid/app/WallpaperManager;->getCropAndSetWallpaperIntent(Landroid/net/Uri;)Landroid/content/Intent;
++    invoke-virtual {p1}, Landroid/content/Context;->getContentResolver()Landroid/content/ContentResolver;
+ 
+-    move-result-object v1
++    move-result-object v2
+ 
+-    .line 32
+-    const-string v2, "from"
++    invoke-virtual {v2, p2}, Landroid/content/ContentResolver;->openInputStream(Landroid/net/Uri;)Ljava/io/InputStream;
++
++    move-result-object v2
+ 
+-    .line 34
+-    sget-object v3, Lcom/oplus/aiunit/vision/te9;->a:Lcom/coloros/gallery3d/app/App;
++    const/4 v3, 0x0
+ 
+-    .line 36
+-    invoke-virtual {v3}, Landroid/content/Context;->getPackageName()Ljava/lang/String;
++    const/4 v4, 0x1
+ 
+-    move-result-object v3
++    const/4 v5, 0x3
+ 
+-    .line 40
+-    invoke-virtual {v1, v2, v3}, Landroid/content/Intent;->putExtra(Ljava/lang/String;Ljava/lang/String;)Landroid/content/Intent;
++    invoke-virtual {v1, v2, v3, v4, v5}, Landroid/app/WallpaperManager;->setStream(Ljava/io/InputStream;Landroid/graphics/Rect;ZI)I
+ 
+-    .line 43
+-    invoke-virtual {p1, v1}, Landroid/app/Activity;->startActivity(Landroid/content/Intent;)V
++    invoke-virtual {v2}, Ljava/io/InputStream;->close()V
++
++    const-string v3, "Wallpaper set"
++
++    const/4 v4, 0x0
++
++    invoke-static {p1, v3, v4}, Landroid/widget/Toast;->makeText(Landroid/content/Context;Ljava/lang/CharSequence;I)Landroid/widget/Toast;
++
++    move-result-object v3
++
++    invoke-virtual {v3}, Landroid/widget/Toast;->show()V
+     :try_end_2e
+     .catch Ljava/lang/Exception; {:try_start_d .. :try_end_2e} :catch_1a
+ 
