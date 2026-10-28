@@ -1,5 +1,5 @@
 diff --git a/odm/etc/camera/config/oplus_camera_config b/odm/etc/camera/config/oplus_camera_config
-index a64cbd40d7881412037ba07ffcea453255dce1ca..b784ce94408ccd4f75beccb224110b37773570ea 100644
+index a64cbd40d7881412037ba07ffcea453255dce1ca..1203c88a97f85322a36aaa6ca20f418637147000 100644
 --- a/odm/etc/camera/config/oplus_camera_config
 +++ b/odm/etc/camera/config/oplus_camera_config
 @@ -88,7 +88,7 @@
@@ -28,7 +28,7 @@ index a64cbd40d7881412037ba07ffcea453255dce1ca..b784ce94408ccd4f75beccb224110b37
  },
  
  {
-@@ -707,6 +707,13 @@
+@@ -707,6 +707,20 @@
    "Value": "0"
  },
  
@@ -39,10 +39,17 @@ index a64cbd40d7881412037ba07ffcea453255dce1ca..b784ce94408ccd4f75beccb224110b37
 +  "Value": "1"
 +},
 +
++{
++  "VendorTag": "com.oplus.feature.breeno.scan",
++  "Type": "Byte",
++  "Count": "1",
++  "Value": "0"
++},
++
  {
    "VendorTag": "com.oplus.feature.super.text.support",
    "Type": "Byte",
-@@ -714,6 +721,13 @@
+@@ -714,6 +728,13 @@
    "Value": "1"
  },
  
@@ -56,7 +63,7 @@ index a64cbd40d7881412037ba07ffcea453255dce1ca..b784ce94408ccd4f75beccb224110b37
  {
    "VendorTag": "com.oplus.face.rectify.support",
    "Type": "Byte",
-@@ -1026,7 +1040,7 @@
+@@ -1026,7 +1047,7 @@
    "VendorTag": "com.oplus.10bits.heic.encode.support",
    "Type": "Byte",
    "Count": "1",
@@ -65,7 +72,7 @@ index a64cbd40d7881412037ba07ffcea453255dce1ca..b784ce94408ccd4f75beccb224110b37
  },
  
  {
-@@ -1389,8 +1403,8 @@
+@@ -1389,8 +1410,8 @@
  {
    "VendorTag": "com.oplus.portrait.master.filter.type.list",
    "Type": "String",
@@ -76,7 +83,7 @@ index a64cbd40d7881412037ba07ffcea453255dce1ca..b784ce94408ccd4f75beccb224110b37
  },
  
  {
-@@ -1468,6 +1482,311 @@
+@@ -1468,6 +1489,311 @@
    "Type": "Byte",
    "Count": "1",
    "Value": "0"
